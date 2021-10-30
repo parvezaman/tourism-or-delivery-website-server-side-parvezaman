@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 
 // MongoDB connectioin
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.kbuol.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-console.log(uri);
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // CORS Middleware
@@ -22,6 +22,13 @@ async function run() {
     await client.connect();
     const database = client.db("travel-the-world");
     const ourServices = database.collection("ourServices");
+
+    // GET API
+    app.get('/services', async(req, res)=>{
+      const cursor = ourServices.find({});
+      const services = await cursor.toArray();
+      res.send(services);
+    })
 
     // POST API
     app.post('/services', async(req, res)=>{
