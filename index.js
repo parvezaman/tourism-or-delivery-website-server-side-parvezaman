@@ -22,13 +22,17 @@ async function run() {
     await client.connect();
     const database = client.db("travel-the-world");
     const ourServices = database.collection("ourServices");
-    // create a document to insert
-    const doc = {
-      title: "Record of a Shriveled Datum",
-      content: "No bytes, no problem. Just insert a document, in MongoDB",
-    }
-    const result = await ourServices.insertOne(doc);
-    console.log(`A document was inserted with the _id: ${result.insertedId}`);
+
+    // POST API
+    app.post('/services', async(req, res)=>{
+      const service = req.body;
+      console.log("hit the post API", service);
+      const result = await ourServices.insertOne(service);
+      console.log(result);
+      res.json(result);
+
+    })
+
   } finally {
     // await client.close();
   }
