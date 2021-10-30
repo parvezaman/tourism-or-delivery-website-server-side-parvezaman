@@ -26,8 +26,7 @@ async function run() {
     // POST API
     app.post('/services', async(req, res)=>{
       const service = req.body;
-      // const serviceWithStatus = service["status"] = "pending";
-      console.log("hit the post API", service);
+      // console.log("hit the post API", service);
       const result = await ourServices.insertOne(service);
       console.log(result);
       res.json(result);
