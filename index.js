@@ -22,15 +22,22 @@ async function run() {
     await client.connect();
     const database = client.db("travel-the-world");
     const ourServices = database.collection("ourServices");
+    const allBookings = database.collection("allBookings");
 
-    // GET API
+    // GET API (Services)
     app.get('/services', async(req, res)=>{
       const cursor = ourServices.find({});
       const services = await cursor.toArray();
       res.send(services);
-    })
+    });
+    // GET API (Bookings)
+    app.get('/bookings', async(req, res)=>{
+      const cursor = allBookings.find({});
+      const bookings = await cursor.toArray();
+      res.send(bookings);
+    });
 
-    // POST API
+    // POST API (Services)
     app.post('/services', async(req, res)=>{
       const service = req.body;
       // console.log("hit the post API", service);
@@ -38,7 +45,16 @@ async function run() {
       console.log(result);
       res.json(result);
 
-    })
+    });
+    // POST API (all bookings)
+    app.post('/bookings', async(req, res)=>{
+      const booking = req.body;
+      // console.log("hit the post API", service);
+      const result = await allBookings.insertOne(booking);
+      console.log(result);
+      res.json(result);
+
+    });
 
   } finally {
     // await client.close();
