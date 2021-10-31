@@ -1,4 +1,4 @@
-# Travel The World Client Side
+# Travel The World server Side
 
 TravelTheWorld is a Tourism management site. A company has taken the responsibility to assure you the cheapest and safest tourism around the globe. We will guide you through our own tour guides as well as assuring your habitat and eatings throughout the travelling time. This website has features like;
 
