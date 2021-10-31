@@ -25,6 +25,7 @@ async function run() {
     const database = client.db("travel-the-world");
     const ourServices = database.collection("ourServices");
     const allBookings = database.collection("allBookings");
+    const allGuides = database.collection("tourGuides");
 
     // GET API (Services)
     app.get('/services', async(req, res)=>{
@@ -37,6 +38,12 @@ async function run() {
       const cursor = allBookings.find({});
       const bookings = await cursor.toArray();
       res.send(bookings);
+    });
+    // GET API (All tour guides)
+    app.get('/allguides', async(req, res)=>{
+      const cursor = allGuides.find({});
+      const guides = await cursor.toArray();
+      res.send(guides);
     });
 
     // POST API (Services)
