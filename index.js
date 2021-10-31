@@ -26,6 +26,7 @@ async function run() {
     const ourServices = database.collection("ourServices");
     const allBookings = database.collection("allBookings");
     const allGuides = database.collection("tourGuides");
+    const placesToVisit = database.collection("placesToVisit");
 
     // GET API (Services)
     app.get('/services', async(req, res)=>{
@@ -44,6 +45,12 @@ async function run() {
       const cursor = allGuides.find({});
       const guides = await cursor.toArray();
       res.send(guides);
+    });
+    // GET API (Places to visit around the world)
+    app.get('/allplaces', async(req, res)=>{
+      const cursor = placesToVisit.find({});
+      const places = await cursor.toArray();
+      res.send(places);
     });
 
     // POST API (Services)
