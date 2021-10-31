@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');  // CORS
 const { MongoClient } = require('mongodb'); //MongoDB
+const ObjectId = require('mongodb').ObjectId;
+const { response } = require('express');
 require('dotenv').config();
 const app = express();
 
@@ -55,6 +57,15 @@ async function run() {
       res.json(result);
 
     });
+
+    //DELETE API (Delete from all bookings)
+    // app.delete('/bookings/:id', async(req, res)=>{
+    //   const id = req.params.id;
+    //   const query = {_id:ObjectId(id)};
+    //   const result = await allBookings.deleteOne(query);
+    //   response.json(result)
+
+    // })
 
   } finally {
     // await client.close();
